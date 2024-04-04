@@ -14,10 +14,51 @@ datasource db {
 }
 
 
+enum Role{
+  USER
+  ADMIN
+
+}
 model User {
   id    Int @id @default(autoincrement())
   name String 
   age String
   email String
+  role Role @default(USER)
+  profile Profile?
+  posts Post[]
+
   
 }
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  title  String
+  content String
+  user   User   @relation(fields: [userId], references: [id])
+   userId Int @unique
+}
+
+model Post {
+  id     Int    @id @default(autoincrement())
+  title  String
+  content String
+  user   User   @relation(fields: [userId], references: [id],onDelete: Cascade, onUpdate: Cascade)
+  userId Int
+}
+
+
+//many to many relationship
+
+model course {
+  id    Int @id @default(autoincrement())
+  name  String
+  students student[]
+}
+
+model student {
+  id    Int @id @default(autoincrement())
+  name  String
+  courses course[]
+}
+
