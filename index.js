@@ -74,3 +74,24 @@ app.get('/get-user', async(req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
     });
+
+
+    // create a new post
+
+    app.post('/add-post', async(req, res) => {
+
+        const {title,content,userId} = req.body;
+    
+        const newPost= await Prisma.post.create({
+            data:{
+                title,
+                content,
+                userId
+            }
+        })
+    
+        res.status(200).json("Post added successfully");
+    
+    
+    });
+    
