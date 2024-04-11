@@ -37,7 +37,7 @@ app.get('/get-user', async(req, res) => {
     res.status(200).json(users);
     });
     
-    //update data
+    //update data in database
 
     app.patch('/update-user/:id', async(req, res) => {
         const id = parseInt(req.params.id);
